@@ -83,17 +83,33 @@ Các hàm chính (được đăng ký để LLM gọi tự động)
 | `quet_lo_hong(muc_tieu, cang)` | Quét lỗ hổng cơ bản (`--script vuln`) | "Kiểm tra lỗ hổng trên cổng 80" |
 |`quet_nmap(muc_tieu, tuy_chon="", phan_tich=False)` | quét tối ưu cho pentest | quét tối ưu nhất mạng x.x.x.x |
 
+1 số lệnh mẫu 
+Quét dịch vụ (model sẽ chọn tool phù hợp)
+```
+llm --model gemini/gemini-2.5-flash --functions nmap_ai.py "Quét và phân tích dịch vụ trên 123.30.136.246"
+```
+
+Quét nhanh (tương đương quet_nhanh)
+```
+llm --model gemini/gemini-2.5-flash --functions nmap_ai.py "Quét nhanh (fast scan) trên 123.30.136.246 và tóm tắt kết quả"
+```
+
+Quét ping sweep cho dải nội bộ (model có thể gọi lay_thong_tin_mang_local rồi quet_ping)
+```
+llm --model gemini/gemini-2.5-flash --functions nmap_ai.py "Lấy thông tin mạng local và quét ping các host trong dải gợi ý"
+```
+```
+ llm --model gemini/gemini-2.5-flash --functions test.py "mạng local của tôi là gì"
+```
 
 Ví dụ thực tế
+<img width="1489" height="595" alt="image" src="https://github.com/user-attachments/assets/768f98a9-1ac1-490f-a26f-dd43793b44d1" />
+<img width="1497" height="240" alt="image" src="https://github.com/user-attachments/assets/bf9fabf5-02f5-4ff1-a29f-eefae7360fbe" />
 
-- Quét và trả JSON cho mạng cục bộ:
-```
-llm --model gemini/gemini-2.5-flash --functions nmap_ai.py "Thực hiện quét toàn diện mạng cục bộ: lấy dải quét, phát hiện host qua ping, phân tích dịch vụ trên cổng 22,80,443, và trả về JSON thô."
-```
 
 - Quét IP công khai (ví dụ dùng `-Pn` để bỏ kiểm tra ping):
 ```
-llm --model gemini/gemini-2.5-flash --functions nmap_ai.py "Phân tích dịch vụ (-sV -Pn) trên 123.30.136.246, trả về JSON."
+llm --model gemini/gemini-2.5-flash --functions nmap_ai.py "Quét ,phân tích dịch vụ trên 123.30.136.246, trả về JSON."
 ```
 <img width="1513" height="573" alt="image" src="https://github.com/user-attachments/assets/9ba08510-c7ee-4009-88fc-ae49df3af9bc" />
 

@@ -84,6 +84,9 @@ def tinh_dai_mang(ip_addr, cidr):
         return f"{network_addr}/{cidr}"
     except:
         return None
+def quet_toi_uu_nhat(muc_tieu):
+    """Quét Nmap tối ưu nhất cho mục tiêu."""
+    return quet_nmap(muc_tieu, "-sC -sV -p-", phan_tich=True)
 
 def quet_nmap(muc_tieu, tuy_chon="", phan_tich=False):
     """Quét Nmap cơ bản, với tùy chọn parse JSON."""
@@ -164,4 +167,5 @@ def register_tools(register):
     register(quet_ping)
     register(quet_script)
     register(quet_lo_hong)
+    register(quet_toi_uu_nhat)
 

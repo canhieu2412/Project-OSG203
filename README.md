@@ -1,16 +1,16 @@
-Công Cụ Quét Mạng Nmap Tích Hợp Trí Tuệ Nhân Tạo (`nmap_ai.py`)
+Công Cụ Quét Mạng Nmap Tích Hợp Trí Tuệ Nhân Tạo 
 
 Giới thiệu
 
 `nmap_ai.py` là một plugin Python cho LLM CLI (tool-calling) nhằm hỗ trợ quét và phân tích mạng bằng ngôn ngữ tự nhiên. Công cụ sử dụng Nmap để thực hiện quét, rồi dùng mô hình ngôn ngữ lớn để điều phối các bước và trả về kết quả dưới dạng JSON có cấu trúc hoặc văn bản phân tích.
 
-Dự án được phát triển trong khuôn khổ môn OSG203 (Hệ Điều Hành Mở), Nhóm 3, năm 2025.
+Dự án được phát triển trong khuôn khổ môn OSG203 , Nhóm 3, năm 2025.
 
 Mục tiêu
 
 - Tự động hóa quy trình quét mạng thông qua yêu cầu bằng ngôn ngữ tự nhiên.
 - Trích xuất và tiêu chuẩn hóa kết quả Nmap dưới dạng JSON để dễ xử lý tự động.
-- Hỗ trợ đa nền tảng (Windows, Linux, macOS).
+- Hỗ trợ đa nền tảng (Windows, Linux).
 
 Tính năng chính
 
@@ -26,33 +26,18 @@ Yêu cầu hệ thống
 - Nmap (cài đặt hệ điều hành).
 - LLM CLI (`pip install llm`) để sử dụng tính năng tool-calling với mô hình AI.
 - Khóa API cho mô hình AI tương ứng (ví dụ: Google/Gemini hoặc OpenAI).
-
+- Lấy API KEY miễn phí của gemini tại https://aistudio.google.com/api-keys
 Cài đặt
 
-1. Cài đặt LLM CLI và mô hình (ví dụ với Gemini):
+1. Cài đặt LLM CLI , NMAP và mô hình :
+   chạy lệnh dưới để tự động cài đặt NMAP và config llm
 ```
-pip install llm
-llm models install gemini
-llm keys set google   # Thiết lập khóa API cho Gemini
+./setup_llm.sh
 ```
+<img width="1068" height="633" alt="image" src="https://github.com/user-attachments/assets/87f536f1-b8cb-43cf-b692-fec666d261ee" />
 
-2. Cài đặt Nmap
+Sau khi cài hoàn tất thì ta tiến tới bước sử dụng :
 
-- Ubuntu / Debian:
-```
-sudo apt update && sudo apt install nmap
-```
-
-- macOS:
-```
-brew install nmap
-```
-
-- Windows:
-Tải installer từ trang chính thức của Nmap và thêm thư mục cài đặt vào PATH.
-
-3. Triển khai công cụ:
-- Tải `nmap_ai.py` vào thư mục làm việc. Không cần cài thêm thư viện Python khác ngoài `llm` nếu dùng LLM CLI.
 
 Sử dụng
 
@@ -62,7 +47,7 @@ llm --model <model> --functions nmap_ai.py "Mô tả yêu cầu bằng ngôn ng�
 ```
 Ví dụ:
 ```
-llm --model gemini/gemini-2.5-flash --functions nmap_ai.py "Phân tích dịch vụ (-sV -Pn) trên địa chỉ 123.30.136.246, trả về JSON."
+llm --model gemini/gemini-2.5-flash --functions nmap_ai.py "Quét và phân tích dịch vụ  trên địa chỉ 123.30.136.246, trả về JSON."
 ```
 
 Duy trì ngữ cảnh (session)
@@ -89,6 +74,8 @@ Các hàm chính (được đăng ký để LLM gọi tự động)
 | `quet_ping(muc_tieu)` | Quét ping để phát hiện host hoạt động (-sn) | "Quét ping 192.168.1.0/24" |
 | `quet_script(muc_tieu, script, cang)` | Thực thi script NSE (vd: http-title) | "Thực thi script http-title trên IP X" |
 | `quet_lo_hong(muc_tieu, cang)` | Quét lỗ hổng cơ bản (`--script vuln`) | "Kiểm tra lỗ hổng trên cổng 80" |
+|`quet_nmap(muc_tieu, tuy_chon="", phan_tich=False)` | quét tối ưu cho pentest | quét tối ưu nhất mạng x.x.x.x |
+
 
 Ví dụ thực tế
 
@@ -101,15 +88,9 @@ llm --model gemini/gemini-2.5-flash --functions nmap_ai.py "Thực hiện quét 
 ```
 llm --model gemini/gemini-2.5-flash --functions nmap_ai.py "Phân tích dịch vụ (-sV -Pn) trên 123.30.136.246, trả về JSON."
 ```
+<img width="1513" height="573" alt="image" src="https://github.com/user-attachments/assets/9ba08510-c7ee-4009-88fc-ae49df3af9bc" />
 
-Chạy độc lập (không qua LLM CLI)
 
-Công cụ có một số chế độ kiểm thử có thể chạy trực tiếp:
-```
-python nmap_ai.py               # In thông tin mạng cục bộ
-python nmap_ai.py ping 192.168.1.0/24
-python nmap_ai.py dich_vu scanme.nmap.org
-```
 
 Xử lý lỗi thường gặp
 
@@ -125,14 +106,11 @@ Bảo mật và tuân thủ pháp lý
 
 Gợi ý tối ưu
 
-- Nếu mô hình Gemini cho kết quả không mong muốn, thử chuyển sang mô hình khác (ví dụ OpenAI GPT-4o).
+- Nếu mô hình Gemini cho kết quả không mong muốn, thử chuyển sang mô hình khác (ví dụ OpenAI GPT-4o, nhưng mất tiền =)))))))) ).
 - Khi cần kết quả thô và đáng tin cậy, yêu cầu rõ “trả về JSON thô” trong prompt.
 
 Tác giả và liên hệ
 
 - Nhóm phát triển: Nhóm 3, Môn OSG203 (2025).  
-- Người liên hệ: canhieu (hoặc thay bằng địa chỉ email / thông tin liên lạc cụ thể).
+- Người liên hệ: canhieu (người đại diện nhóm).
 
-Giấy phép
-
-- Mặc định: MIT License (hoặc thay bằng giấy phép mà nhóm chọn).

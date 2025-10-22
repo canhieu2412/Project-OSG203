@@ -41,7 +41,7 @@ Cài đặt
 ```
 ./setup_llm.sh
 ```
-<img width="1068" height="633" alt="image" src="https://github.com/user-attachments/assets/87f536f1-b8cb-43cf-b692-fec666d261ee" />
+<img width="1190" height="627" alt="image" src="https://github.com/user-attachments/assets/9725d8db-8663-4517-a3e2-e09493c5a16f" />
 
 Sau khi cài hoàn tất thì ta tiến tới bước sử dụng :
 

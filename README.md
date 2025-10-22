@@ -31,6 +31,13 @@ Cài đặt
 
 1. Cài đặt LLM CLI , NMAP và mô hình :
    chạy lệnh dưới để tự động cài đặt NMAP và config llm
+
+   Trong trường hợp nếu bị lỗi , hãy tạo môi trường ảo trước bằng lệnh :
+   ```
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+   
 ```
 ./setup_llm.sh
 ```

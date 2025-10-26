@@ -113,6 +113,56 @@ llm --model gemini/gemini-2.5-flash --functions nmap_ai.py "Quét ,phân tích d
 ```
 <img width="1513" height="573" alt="image" src="https://github.com/user-attachments/assets/9ba08510-c7ee-4009-88fc-ae49df3af9bc" />
 
+Nguyên lý hoạt đông 
+
+```
++---------------------------+
+| Người dùng nhập yêu cầu   |
+| qua LLM CLI (ngôn ngữ     |
+| tự nhiên hoặc pipe)       |
++---------------------------+
+              ↓
++---------------------------+
+| LLM CLI phân tích yêu cầu  |
+| và ánh xạ tới hàm phù hợp |
+| (dùng @llm.hookimpl)      |
++---------------------------+
+              ↓
++---------------------------+       +---------------------------+
+| Kiểm tra loại yêu cầu     | ----> | lay_thong_tin_mang_local |
+| (quét hay lấy thông tin)  |       | - Lấy IP, giao diện      |
++---------------------------+       | - Tính dải quét gợi ý    |
+              ↓                    +---------------------------+
++---------------------------+
+| Thực thi lệnh Nmap        |
+| qua hàm quet_nmap hoặc    |
+| các hàm chuyên biệt       |
+| (quet_nhanh, quet_cang,   |
+| quet_dich_vu, quet_os,    |
+| quet_ping, quet_script,   |
+| quet_lo_hong, quet_toi_uu)|
++---------------------------+
+              ↓
++---------------------------+       +---------------------------+
+| Phân tích đầu ra Nmap     | <---- | phan_tich_output_nmap    |
+| (nếu phan_tich=True)      |       | - Trích xuất host, cổng  |
+| - JSON hoặc văn bản thô   |       | - Chuyển thành JSON      |
++---------------------------+       +---------------------------+
+              ↓
++---------------------------+
+| Trả kết quả qua LLM CLI   |
+| - JSON hoặc văn bản       |
+| - Lưu ngữ cảnh nếu dùng -s|
++---------------------------+
+              ↓
++---------------------------+
+| Xử lý lỗi (nếu có)        |
+| - Timeout, Nmap chưa cài  |
+| - Gợi ý: dùng -Pn, JSON   |
++---------------------------+
+```
+<img width="393" height="894" alt="image" src="https://github.com/user-attachments/assets/82d0e9fe-7f5b-4e5b-a76d-bb0cb123fe6b" />
+
 
 
 Xử lý lỗi thường gặp

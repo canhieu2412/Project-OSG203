@@ -23,7 +23,7 @@ Tính năng chính
 Yêu cầu hệ thống
 
 - Python 3.7 hoặc cao hơn.
-- Nmap (cài đặt hệ điều hành).
+- Nmap (https://nmap.org/).
 - LLM CLI (`pip install llm`) để sử dụng tính năng tool-calling với mô hình AI.
 - Khóa API cho mô hình AI tương ứng (ví dụ: Google/Gemini hoặc OpenAI).
 - Lấy API KEY miễn phí của gemini tại https://aistudio.google.com/api-keys

@@ -56,12 +56,16 @@ Ví dụ:
 ```
 llm --model gemini/gemini-2.5-flash --functions nmap_ai.py "Quét và phân tích dịch vụ  trên địa chỉ 123.30.136.246, trả về JSON."
 ```
+<img width="925" height="310" alt="image" src="https://github.com/user-attachments/assets/8f688545-2728-41ce-b647-9f56b80bc1e3" />
+
+<img width="939" height="756" alt="image" src="https://github.com/user-attachments/assets/3722124c-061c-4bfa-8d28-e16cfc2979a1" />
 
 Duy trì ngữ cảnh (session)
 Sử dụng `-s <tên_phiên>` để giữ ngữ cảnh qua nhiều truy vấn:
 ```
 llm --model gemini/gemini-2.5-flash --functions nmap_ai.py -s phan_tich_mang "Tiếp tục kiểm tra lỗ hổng trên host vừa phát hiện"
 ```
+<img width="934" height="304" alt="image" src="https://github.com/user-attachments/assets/7ac79731-b178-4bc0-a213-1421cbf9aebe" />
 
 Nhận đầu vào từ ống dẫn (pipe)
 ```
@@ -88,6 +92,7 @@ Quét dịch vụ (model sẽ chọn tool phù hợp)
 ```
 llm --model gemini/gemini-2.5-flash --functions nmap_ai.py "Quét và phân tích dịch vụ trên 123.30.136.246"
 ```
+<img width="628" height="577" alt="Screenshot 2025-10-24 205521" src="https://github.com/user-attachments/assets/192db2f0-3157-48c6-a9d3-a5c24ff36a17" />
 
 Quét nhanh (tương đương quet_nhanh)
 ```
@@ -98,6 +103,8 @@ Quét ping sweep cho dải nội bộ (model có thể gọi lay_thong_tin_mang_
 ```
 llm --model gemini/gemini-2.5-flash --functions nmap_ai.py "Lấy thông tin mạng local và quét ping các host trong dải gợi ý"
 ```
+<img width="927" height="482" alt="image" src="https://github.com/user-attachments/assets/19e04272-9732-41a1-8829-c80163733b36" />
+
 ```
  llm --model gemini/gemini-2.5-flash --functions test.py "mạng local của tôi là gì"
 ```

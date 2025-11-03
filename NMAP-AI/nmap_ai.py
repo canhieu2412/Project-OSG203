@@ -110,7 +110,7 @@ def quet_nmap(muc_tieu, tuy_chon="", phan_tich=False):
         return f"Lỗi: {ex}"
 
 def phan_tich_output_nmap(output):
-    """Parse đơn giản thành JSON (khác repo gốc)."""
+    """Parse đơn giản thành JSON ."""
     ket_qua = {"hosts": [], "loi": None}
     try:
         hosts = re.findall(r'Nmap scan report for ([\d\.]+)', output)

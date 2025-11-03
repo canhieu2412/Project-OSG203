@@ -109,7 +109,7 @@ llm --model gemini/gemini-2.5-flash --functions nmap_ai.py "Lấy thông tin m�
 <img width="927" height="482" alt="image" src="https://github.com/user-attachments/assets/19e04272-9732-41a1-8829-c80163733b36" />
 
 ```
- llm --model gemini/gemini-2.5-flash --functions test.py "mạng local của tôi là gì"
+ llm --model gemini/gemini-2.5-flash --functions nmap_ai.py "mạng local của tôi là gì"
 ```
 
 Ví dụ thực tế

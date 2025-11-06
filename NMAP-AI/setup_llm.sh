@@ -56,13 +56,13 @@ mkdir -p ~/.config/llm
 
 # --- Nhập key ---
 echo ""
-read -p "Nhập Google API key (để trống nếu bỏ qua): " GOOGLE_KEY
+read -p "Nhập Google API key (để trống nếu bỏ qua): " GOOGLE_Gemini_KEY
 read -p "Nhập OpenAI API key (để trống nếu bỏ qua): " OPENAI_KEY
 
 # --- Thiết lập key ---
 if [ -n "$GOOGLE_KEY" ]; then
     pip install llm-gemini
-    echo "$GOOGLE_KEY" | llm keys set google
+    echo "$GOOGLE_KEY" | llm keys set gemini
     echo "Đã lưu key Google"
 fi
 

@@ -61,6 +61,7 @@ read -p "Nhập OpenAI API key (để trống nếu bỏ qua): " OPENAI_KEY
 
 # --- Thiết lập key ---
 if [ -n "$GOOGLE_KEY" ]; then
+    pip install llm-gemini
     echo "$GOOGLE_KEY" | llm keys set google
     echo "Đã lưu key Google"
 fi
